@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maintainer Programs — FOSS United</title>
+<meta name="description" content="India's FOSS ecosystem runs on people working unpaid, unseen, and alone. The Maintainer Programs is FOSS United's commitment to change that.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --ink:#1A1A1A;
+    --muted:#5D625E;
+    --hairline:#E3E5E5;
+    --green:#387E42;
+    --green-bright:#53B45C;
+    --green-tint:#EAF4EB;
+    --blue:#2456CD;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  ::selection{background:var(--green-bright); color:#fff;}
+  .skip{position:absolute; left:-999px; top:0; background:var(--ink); color:#fff; padding:10px 16px; z-index:100;}
+  .skip:focus{left:12px; top:12px;}
+
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.94); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--hairline);
+  }
+  .nav{
+    max-width:var(--max); margin:0 auto; padding:20px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .brand{font-size:18px; text-decoration:none; white-space:nowrap;}
+  .brand b{font-weight:800;}
+  .brand span{color:var(--muted); font-weight:400;}
+  .navlinks{display:flex; gap:24px; flex-wrap:wrap;}
+  .navlinks a{
+    font-size:14.5px; font-weight:500; text-decoration:none; color:var(--ink);
+    border-bottom:2px solid transparent; padding-bottom:3px;
+    transition:color .15s, border-color .15s;
+  }
+  .navlinks a:hover{color:var(--green); border-color:var(--green);}
+  .navlinks a.util{color:var(--blue);}
+
+  section{padding:88px 0;}
+  section + section{border-top:1px solid var(--hairline);}
+  .eyebrow{
+    font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 20px;
+  }
+  h1,h2,h3{font-family:'Inter',sans-serif; letter-spacing:-0.01em;}
+  h2{font-weight:800; font-size:clamp(28px,3.6vw,38px); margin:0 0 14px; max-width:20ch;}
+  .section-lede{color:var(--muted); max-width:64ch; margin:0 0 8px; font-size:16.5px;}
+
+  /* hero */
+  .hero{padding-top:60px;}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;}
+  h1{font-weight:800; font-size:clamp(34px,4.6vw,52px); line-height:1.12; margin:0 0 32px; max-width:14ch;}
+  h1 .accent{color:var(--green);}
+  .hero-list{list-style:none; margin:0 0 36px; padding:0; max-width:600px;}
+  .hero-list li{display:flex; gap:14px; padding:16px 0; border-top:1px solid var(--hairline); font-size:16px; color:var(--ink);}
+  .hero-list li:last-child{border-bottom:1px solid var(--hairline);}
+  .hero-list .sq{width:12px; height:12px; background:var(--green-bright); flex-shrink:0; margin-top:6px; border-radius:2px;}
+  .hero-list b{font-weight:700;}
+  .hero-list span.desc{color:var(--muted); font-weight:400;}
+  .textlink{color:var(--blue); text-decoration:underline; text-underline-offset:3px; font-weight:600; font-size:16px; display:inline-flex; align-items:center; gap:6px;}
+  .textlink:hover{opacity:.75;}
+
+  .hero-illustration{position:relative; display:flex; align-items:center; justify-content:center; min-height:380px;}
+  .illustration-slot{
+    position:relative; z-index:1; width:100%; height:380px;
+    border:1.5px dashed #C7D6C9; border-radius:8px;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .illustration-slot .blob{position:absolute; width:72%; height:72%; background:var(--green-tint); border-radius:50%; z-index:0;}
+  .illustration-hint{position:relative; z-index:1; font-size:12.5px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin:0;}
+
+  /* buttons */
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    padding:13px 24px; font-size:15px; font-weight:700; border-radius:6px; cursor:pointer;
+    border:1.5px solid var(--ink); transition:background .15s, color .15s, border-color .15s;
+  }
+  .btn.solid{background:var(--ink); color:#fff;}
+  .btn.solid:hover{background:transparent; color:var(--ink);}
+  .btn.green{background:var(--green); border-color:var(--green); color:#fff;}
+  .btn.green:hover{background:transparent; color:var(--green);}
+  .btn.ghost{background:transparent; color:var(--ink);}
+  .btn.ghost:hover{background:var(--ink); color:#fff;}
+
+  /* persona card (Who do we support) */
+  .persona-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; margin-top:36px;}
+  .persona-card{
+    border:1px solid var(--hairline); border-radius:10px; padding:30px; background:#fff;
+  }
+  .persona-head{display:flex; align-items:center; gap:16px; margin-bottom:18px;}
+  .persona-avatar{
+    width:52px; height:52px; border-radius:50%; background:var(--green-tint);
+    display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--green); font-size:19px; flex-shrink:0;
+  }
+  .persona-name{font-weight:700; font-size:19px; margin:0;}
+  .persona-tag{font-size:13px; color:var(--muted); margin:2px 0 0;}
+  .persona-story{color:var(--muted); font-size:15.5px; margin:0 0 26px;}
+  .persona-stats{display:flex; flex-direction:column; gap:16px;}
+  .pstat-row{display:grid; grid-template-columns:90px 1fr 70px; gap:14px; align-items:center;}
+  .pstat-label{font-size:13px; font-weight:700; color:var(--ink); text-transform:uppercase; letter-spacing:0.04em;}
+  .pstat-track{height:8px; background:var(--hairline); border-radius:20px; overflow:hidden;}
+  .pstat-fill{height:100%; background:var(--green-bright); border-radius:20px;}
+  .pstat-val{font-size:12.5px; color:var(--muted); text-align:right;}
+
+  .signals{margin:0; padding:0; list-style:none;}
+  .signals li{
+    display:flex; gap:12px; padding:14px 0; border-top:1px solid var(--hairline); font-size:15.5px; color:var(--ink);
+  }
+  .signals li:last-child{border-bottom:1px solid var(--hairline);}
+  .signals .sq{width:11px; height:11px; background:var(--green-bright); flex-shrink:0; margin-top:6px; border-radius:2px;}
+  .signals-title{font-weight:700; font-size:16px; margin:0 0 4px;}
+
+  /* long-version / why section */
+  .longform-body{max-width:72ch;}
+  .longform-body p{color:var(--muted); font-size:16.5px;}
+  .longform-body h3{font-weight:700; font-size:21px; margin:38px 0 12px; color:var(--ink);}
+  blockquote.definition{
+    margin:30px 0; padding:24px 28px; background:var(--green-tint); border-left:4px solid var(--green);
+    font-size:19px; line-height:1.5; color:var(--ink); font-weight:500; border-radius:0 6px 6px 0;
+  }
+  blockquote.definition cite{display:block; margin-top:14px; font-style:normal; font-size:13px; font-weight:600; color:var(--muted); letter-spacing:0.02em;}
+  .problem-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin:30px 0;}
+  .problem-card{background:#fff; border:1px solid var(--hairline); border-radius:8px; padding:22px;}
+  .problem-card .tag{
+    display:inline-block; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;
+    color:var(--green); margin:0 0 12px; background:var(--green-tint); padding:4px 10px; border-radius:20px;
+  }
+  .problem-card p{font-size:14.5px; color:var(--muted); margin:0;}
+
+  /* how / three-layer model */
+  .layers{margin:36px 0 8px;}
+  .layer{display:grid; grid-template-columns:210px 1fr; gap:32px; padding:30px 0; border-top:1px solid var(--hairline); align-items:start;}
+  .layers .layer:last-child{border-bottom:1px solid var(--hairline);}
+  .layer-viz{position:relative; height:70px; display:flex; align-items:center;}
+  .layer-viz .band{height:16px; border-radius:20px;}
+  .layer-viz .band.l1{width:100%; background:#CDE6D0;}
+  .layer-viz .band.l2{width:66%; background:var(--green-bright);}
+  .layer-viz .band.l3{width:34%; background:var(--green);}
+  .layer-label{font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;}
+  .layer-title{font-weight:700; font-size:22px; margin:0 0 10px;}
+  .layer-body p{margin:0 0 10px; color:var(--muted); font-size:15px;}
+  .layer-body ul{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:14.5px;}
+  .layer-body li{margin-bottom:6px;}
+  .layer-body a{color:var(--blue); text-decoration:underline; text-underline-offset:2px;}
+
+  /* get involved tabs */
+  .tabs-nav{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:0; border-bottom:1px solid var(--hairline);}
+  .tab-btn{
+    font-family:'Inter',sans-serif; font-size:15px; font-weight:700; background:none; border:none;
+    padding:14px 4px; margin-right:30px; color:var(--muted); cursor:pointer;
+    border-bottom:3px solid transparent; position:relative; top:1.5px;
+  }
+  .tab-btn[aria-selected="true"]{color:var(--ink); border-color:var(--green-bright);}
+  .tab-panel{display:none; padding-top:36px;}
+  .tab-panel.active{display:block;}
+  .tab-panel h3{font-weight:700; font-size:24px; margin:0 0 14px;}
+  .tab-panel p{color:var(--muted); max-width:62ch; font-size:16.5px;}
+  .tab-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-top:24px;}
+  .subsection-divider{margin:56px 0 0; padding-top:56px; border-top:1px solid var(--hairline);}
+
+  footer.site{padding:52px 0 68px;}
+  footer.site .wrap{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;}
+  footer.site .fbrand{font-size:16px; font-weight:800; margin:0 0 6px;}
+  footer.site .flinks{display:flex; gap:20px; flex-wrap:wrap; font-size:13.5px; color:var(--muted);}
+  footer.site .flinks a{text-decoration:none;}
+  footer.site .flinks a:hover{color:var(--blue);}
+  footer.site .fine{font-size:13px; color:var(--muted); margin-top:22px; line-height:1.6;}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .hero-illustration{order:-1; min-height:260px;}
+    .illustration-slot{height:240px;}
+    .problem-grid{grid-template-columns:1fr;}
+    .layer{grid-template-columns:1fr;}
+    .persona-grid{grid-template-columns:1fr; gap:36px;}
+    section{padding:56px 0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;} *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="nav">
+    <a class="brand" href="#top"><b>FOSS United</b> <span>/ Maintainers</span></a>
+    <nav class="navlinks">
+      <a href="#who-support">Who do we support</a>
+      <a href="#why-support">Why do we support</a>
+      <a href="#how-support">How do we support</a>
+      <a class="util" href="grants.html">Grants</a>
+      <a class="util" href="events.html">Events</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Maintainer Programs</p>
+          <h1>India's FOSS ecosystem runs on people working <span class="accent">unpaid, unseen, and alone.</span></h1>
+
+          <ul class="hero-list">
+            <li>
+              <span class="sq"></span>
+              <span><b>Almost nobody knows they exist.</b> <span class="desc">There are hundreds, maybe thousands, of Indian FOSS maintainers doing serious work with no way to be found.</span></span>
+            </li>
+            <li>
+              <span class="sq"></span>
+              <span><b>Even fewer are supported.</b> <span class="desc">We've backed under 50 people in six years. Fewer than 10 projects in our community are financially sustainable today.</span></span>
+            </li>
+            <li>
+              <span class="sq"></span>
+              <span><b>Demand already outpaces us.</b> <span class="desc">Last year we approved fewer than 15% of applications, and still ran a deficit.</span></span>
+            </li>
+          </ul>
+
+          <a class="textlink" href="#who-support">See who this is for ↓</a>
+        </div>
+
+        <div class="hero-illustration">
+          <div class="illustration-slot">
+            <div class="blob"></div>
+            <!-- Drop your illustration <img> in here -->
+            <p class="illustration-hint">Illustration goes here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO DO WE SUPPORT -->
+  <section id="who-support">
+    <div class="wrap">
+      <p class="eyebrow">Who do we support</p>
+      <h2>Not the loudest maintainer. The stuck one.</h2>
+      <p class="section-lede">We're not looking for polished, famous projects. We're looking for people whose project outgrew their bandwidth before it outgrew their bedroom.</p>
+
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="persona-head">
+            <div class="persona-avatar">K</div>
+            <div>
+              <p class="persona-name">Kratika</p>
+              <p class="persona-tag">Creator, FOSS project on the rise</p>
+            </div>
+          </div>
+          <p class="persona-story">Kratika has built several FOSS projects over the years, usually to fix a problem she ran into herself. This time is different &mdash; the project actually took off. Adoption is real, issues are piling up, and for the first time she's spending more nights triaging bug reports than writing code.</p>
+
+          <div class="persona-stats">
+            <div class="pstat-row">
+              <span class="pstat-label">Intent</span>
+              <div class="pstat-track"><div class="pstat-fill" style="width:82%;"></div></div>
+              <span class="pstat-val">Med&ndash;High</span>
+            </div>
+            <div class="pstat-row">
+              <span class="pstat-label">Skills</span>
+              <div class="pstat-track"><div class="pstat-fill" style="width:82%;"></div></div>
+              <span class="pstat-val">Med&ndash;High</span>
+            </div>
+            <div class="pstat-row">
+              <span class="pstat-label">Resources</span>
+              <div class="pstat-track"><div class="pstat-fill" style="width:22%;"></div></div>
+              <span class="pstat-val">Low</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="signals-title">You might be who we're looking for if:</p>
+          <ul class="signals">
+            <li><span class="sq"></span><span>Your project has real users now, not just you &mdash; and you didn't plan for that.</span></li>
+            <li><span class="sq"></span><span>You're good at scoping problems and shipping fixes, but there's no time left to actually build.</span></li>
+            <li><span class="sq"></span><span>You're the only person keeping the project alive, and you know it.</span></li>
+            <li><span class="sq"></span><span>Feature requests and bug reports now eat the hours you used to spend improving the thing itself.</span></li>
+            <li><span class="sq"></span><span>You've never asked for money for this work, mostly because it never occurred to you that you could.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY DO WE SUPPORT -->
+  <section id="why-support">
+    <div class="wrap">
+      <p class="eyebrow">Why do we support</p>
+      <h2>Because maintenance is invisible, and invisible work burns people out.</h2>
+      <div class="longform-body">
+        <p>Behind almost every project that powers modern software infrastructure, there is a person, or a small group of people, who decided to build something and then decided to keep it alive. Foundations, companies and communities all matter, but the atomic unit of FOSS is the individual who shows up. We've spent a while trying to find the right word for that person &mdash; "developer" is too narrow, "creator" leaves out the people sustaining someone else's work, and "contributor" is too broad. The word that comes closest is <b>maintainer</b>, and we define it deliberately loosely:</p>
+
+        <blockquote class="definition">
+          Anyone who takes ongoing responsibility for a FOSS or digital commons project &mdash; writing code, reviewing contributions, managing releases, writing documentation, or stewarding the community around it. We don't define maintenance by the size of a project or its user count, but by the sustained, often unpaid labour that goes into keeping something useful alive.
+          <cite>— FOSS United, Maintainer Program Thesis</cite>
+        </blockquote>
+
+        <p>That includes people starting new projects, people keeping old ones on life support, people maintaining the upstream dependencies everyone else quietly relies on, and people doing the unglamorous work of translation, accessibility and localisation. None of it shows up on a resume the way a startup does. All of it is infrastructure.</p>
+
+        <h3>The problem, in three parts</h3>
+        <div class="problem-grid">
+          <div class="problem-card">
+            <span class="tag">Discovery</span>
+            <p>There's no reliable way to find adopters, contributors or users for a FOSS project. Creators end up shouting into HackerNews, Reddit, LinkedIn and X, hoping something sticks.</p>
+          </div>
+          <div class="problem-card">
+            <span class="tag">Community</span>
+            <p>Maintaining a niche project usually means spending most of your time alone behind a screen. There's rarely a peer group of people who understand exactly what you're stuck on.</p>
+          </div>
+          <div class="problem-card">
+            <span class="tag">Sustainability</span>
+            <p>The hardest problem is money. FOSS work carries a cultural expectation of being free, even as cloud companies build entire businesses repackaging it for profit.</p>
+          </div>
+        </div>
+
+        <p>We built the Maintainer Programs to work on all three at once &mdash; not as a one-time grant, but as a long-term relationship with a maintainer's journey, from being completely unknown to running something sustainable. It grows out of, and eventually subsumes, our existing grants program. Read the full <a class="textlink" style="font-size:inherit;" href="https://fossunited.org/maintainers/thesis" target="_blank" rel="noopener">Maintainer Program Thesis</a> and the <a class="textlink" style="font-size:inherit;" href="https://fossunited.org/grants/thesis" target="_blank" rel="noopener">Grants Thesis</a> for the complete picture.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW DO WE SUPPORT -->
+  <section id="how-support">
+    <div class="wrap">
+      <p class="eyebrow">How do we support</p>
+      <h2>A maintainer's journey has three layers, not one grant.</h2>
+      <p class="section-lede">This isn't a funnel, and not every maintainer needs the deepest layer. Our job is to keep expanding all three.</p>
+
+      <div class="layers">
+        <div class="layer">
+          <div>
+            <div class="layer-viz"><div class="band l1"></div></div>
+            <div class="layer-label">Layer 1</div>
+          </div>
+          <div class="layer-body">
+            <h3 class="layer-title">Discovery</h3>
+            <p>Visibility into the FOSS community, and an interface with the foundation. This is the front door &mdash; open to anyone.</p>
+            <ul>
+              <li><a href="https://forklore.in" target="_blank" rel="noopener">Forklore</a> &mdash; a public directory of Indian FOSS maintainers</li>
+              <li>fundingjson &mdash; publishing a project's funding needs so programs like the FOSS Pledge can find it</li>
+              <li>Campaigns, blog posts and case studies (#MeetTheMaintainers, #ForkloreFridays)</li>
+              <li>Visibility at FOSS United events, including IndiaFOSS</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div>
+            <div class="layer-viz"><div class="band l2"></div></div>
+            <div class="layer-label">Layer 2</div>
+          </div>
+          <div class="layer-body">
+            <h3 class="layer-title">Community</h3>
+            <p>Opt in once you're in the discovery layer. This is the layer we expect most maintainers to actually live in &mdash; including graduated grantees.</p>
+            <ul>
+              <li>A mailing list and forum space just for maintainers, plus training on security, accessibility and compliance</li>
+              <li>Community calls, and the Maintainer Summit held the day before IndiaFOSS</li>
+              <li>The Maintainer Pack &mdash; cloud credits, discounted tools, travel scholarships and workshop access</li>
+              <li>Volunteer support from the foundation on design, community building, marketing and technical guidance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div>
+            <div class="layer-viz"><div class="band l3"></div></div>
+            <div class="layer-label">Layer 3</div>
+          </div>
+          <div class="layer-body">
+            <h3 class="layer-title">Support</h3>
+            <p>Where the foundation invests real time and money into a small pool of projects &mdash; funds, community building, infrastructure and help finding adoption.</p>
+            <ul>
+              <li>Grants, fellowships and travel funding, plus help raising money elsewhere &mdash; see the <a href="grants.html">grants directory</a></li>
+              <li>Hands-on help building a community around a project, including through Season of Commits and FOSS Hack</li>
+              <li>Sponsored security, accessibility and compliance audits, plus hosting support</li>
+              <li>Press coverage and introductions to people who could adopt the project</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- GET INVOLVED -->
+      <div class="subsection-divider">
+        <p class="eyebrow">Get involved</p>
+        <h2>Be a part of the change</h2>
+
+        <div class="tabs-nav" role="tablist" aria-label="Who this is for" style="margin-top:26px;">
+          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-maintainers" id="tab-maintainers">Maintainers</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-orgs" id="tab-orgs">Organisations</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-everyone" id="tab-everyone">Everyone else</button>
+        </div>
+
+        <div class="tab-panel active" id="panel-maintainers" role="tabpanel" aria-labelledby="tab-maintainers">
+          <h3>You're already doing the work. Let us make it easier.</h3>
+          <p>If you're building or sustaining a FOSS or digital-commons project out of India &mdash; alone or with a small crew &mdash; this program exists for you. Get discovered, find people who understand exactly what you're stuck on, and if the project's ready, get support with no strings attached.</p>
+          <div class="tab-ctas">
+            <a class="btn green" href="https://forklore.in" target="_blank" rel="noopener">Get listed on Forklore</a>
+            <a class="btn ghost" href="grants.html">Browse grants</a>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-orgs" role="tabpanel" aria-labelledby="tab-orgs">
+          <h3>Fund the individuals, not just the infrastructure.</h3>
+          <p>If your company runs on FOSS &mdash; and it does &mdash; you already depend on maintainers you've never met and probably never paid. Back them directly through the grants program, or put cloud credits, tool licenses, hardware and co-working space straight into their hands through the Maintainer Pack.</p>
+          <div class="tab-ctas">
+            <a class="btn green" href="mailto:maintainers@fossunited.org?subject=Sponsoring%20the%20Maintainer%20Programs">Talk to us about sponsoring</a>
+            <a class="btn ghost" href="mailto:maintainers@fossunited.org?subject=Contributing%20to%20the%20Maintainer%20Pack">Contribute to the Maintainer Pack</a>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-everyone" role="tabpanel" aria-labelledby="tab-everyone">
+          <h3>Community, not charity.</h3>
+          <p>Not a maintainer, and not writing a cheque? Mentor a project through Season of Commits, review a pull request, run a workshop on security or accessibility, or just show up at a Maintainer Summit and talk to the people who build the software you use every day.</p>
+          <div class="tab-ctas">
+            <a class="btn green" href="events.html">See maintainer events</a>
+            <a class="btn ghost" href="https://fossunited.org/volunteers" target="_blank" rel="noopener">Volunteer with us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <p class="fbrand">FOSS United Foundation</p>
+      <p class="fine">Growing India's FOSS ecosystem, one maintainer at a time.<br>CC&#8209;BY&#8209;SA &middot; CIN &ndash; U74999MH2016NPL288653</p>
+    </div>
+    <div class="flinks">
+      <a href="https://fossunited.org" target="_blank" rel="noopener">fossunited.org</a>
+      <a href="https://fossunited.org/maintainers/thesis" target="_blank" rel="noopener">Maintainer thesis</a>
+      <a href="https://fossunited.org/grants/thesis" target="_blank" rel="noopener">Grants thesis</a>
+      <a href="grants.html">Grants directory</a>
+      <a href="events.html">Events</a>
+      <a href="https://forklore.in" target="_blank" rel="noopener">Forklore</a>
+      <a href="mailto:maintainers@fossunited.org">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){ t.setAttribute('aria-selected','false'); });
+        document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+        tab.setAttribute('aria-selected','true');
+        document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

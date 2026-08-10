@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grants Directory — FOSS United Maintainer Programs</title>
+<meta name="description" content="Grants, fellowships and event funding for Indian FOSS maintainers and their projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --ink:#1A1A1A; --muted:#5D625E; --hairline:#E3E5E5;
+    --green:#387E42; --green-bright:#53B45C; --green-tint:#EAF4EB; --blue:#2456CD; --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',system-ui,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  ::selection{background:var(--green-bright); color:#fff;}
+  .skip{position:absolute; left:-999px; top:0; background:var(--ink); color:#fff; padding:10px 16px; z-index:100;}
+  .skip:focus{left:12px; top:12px;}
+
+  header.site{position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--hairline);}
+  .nav{max-width:var(--max); margin:0 auto; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .brand{font-size:18px; text-decoration:none; white-space:nowrap;}
+  .brand b{font-weight:800;}
+  .brand span{color:var(--muted); font-weight:400;}
+  .navlinks{display:flex; gap:24px; flex-wrap:wrap;}
+  .navlinks a{font-size:14.5px; font-weight:500; text-decoration:none; color:var(--ink); border-bottom:2px solid transparent; padding-bottom:3px; transition:color .15s, border-color .15s;}
+  .navlinks a:hover{color:var(--green); border-color:var(--green);}
+  .navlinks a.util{color:var(--blue);}
+  .navlinks a.current{color:var(--green); border-color:var(--green);}
+
+  section{padding:72px 0;}
+  section + section{border-top:1px solid var(--hairline);}
+  .eyebrow{font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin:0 0 20px;}
+  h1{font-weight:800; font-size:clamp(32px,4.4vw,46px); line-height:1.14; margin:0 0 16px; max-width:16ch;}
+  h1 .accent{color:var(--green);}
+  .lede{color:var(--muted); max-width:64ch; font-size:17px; margin:0 0 8px;}
+
+  .tabs-nav{display:flex; gap:8px; flex-wrap:wrap; margin:40px 0 0; border-bottom:1px solid var(--hairline);}
+  .tab-btn{
+    font-family:'Inter',sans-serif; font-size:15.5px; font-weight:700; background:none; border:none;
+    padding:14px 4px; margin-right:32px; color:var(--muted); cursor:pointer;
+    border-bottom:3px solid transparent; position:relative; top:1.5px;
+  }
+  .tab-btn[aria-selected="true"]{color:var(--ink); border-color:var(--green-bright);}
+  .tab-panel{display:none; padding-top:38px;}
+  .tab-panel.active{display:block;}
+
+  .grant-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .grant-card{border:1px solid var(--hairline); border-radius:10px; padding:26px; background:#fff; display:flex; flex-direction:column;}
+  .grant-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .grant-name{font-weight:700; font-size:19px; margin:0;}
+  .grant-amount{font-weight:800; font-size:16px; color:var(--green); white-space:nowrap;}
+  .grant-desc{color:var(--muted); font-size:14.5px; margin:0 0 20px; flex-grow:1;}
+  .grant-meta{font-size:12.5px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em; margin:0 0 18px;}
+  .grant-cta{
+    display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-weight:700; font-size:14.5px;
+    color:var(--blue); text-underline-offset:3px;
+  }
+  .grant-cta:hover{text-decoration:underline;}
+
+  .callout{
+    margin-top:52px; padding:32px; background:var(--green-tint); border-radius:10px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .callout p{margin:0; font-weight:700; font-size:18px; max-width:36ch;}
+
+  footer.site{padding:52px 0 68px;}
+  footer.site .wrap{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;}
+  footer.site .fbrand{font-size:16px; font-weight:800; margin:0 0 6px;}
+  footer.site .flinks{display:flex; gap:20px; flex-wrap:wrap; font-size:13.5px; color:var(--muted);}
+  footer.site .flinks a{text-decoration:none;}
+  footer.site .flinks a:hover{color:var(--blue);}
+  footer.site .fine{font-size:13px; color:var(--muted); margin-top:22px; line-height:1.6;}
+
+  .btn{display:inline-flex; align-items:center; gap:8px; text-decoration:none; padding:13px 24px; font-size:15px; font-weight:700; border-radius:6px; cursor:pointer; border:1.5px solid var(--ink); transition:background .15s, color .15s, border-color .15s;}
+  .btn.green{background:var(--green); border-color:var(--green); color:#fff;}
+  .btn.green:hover{background:transparent; color:var(--green);}
+
+  @media (max-width:760px){
+    .grant-grid{grid-template-columns:1fr;}
+    section{padding:52px 0;}
+    .callout{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="nav">
+    <a class="brand" href="index.html"><b>FOSS United</b> <span>/ Maintainers</span></a>
+    <nav class="navlinks">
+      <a href="index.html#who-support">Who do we support</a>
+      <a href="index.html#why-support">Why do we support</a>
+      <a href="index.html#how-support">How do we support</a>
+      <a class="util current" href="grants.html">Grants</a>
+      <a class="util" href="events.html">Events</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section style="padding-top:60px;">
+    <div class="wrap">
+      <p class="eyebrow">Grants directory</p>
+      <h1>Money for the parts of maintenance <span class="accent">nobody else funds.</span></h1>
+      <p class="lede">Every grant here maps to something concrete a maintainer actually needs &mdash; time, infrastructure, or a way to reach the people who'd use what they've built. Pick the category that fits where your project is right now.</p>
+
+      <div class="tabs-nav" role="tablist" aria-label="Grant categories">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-projects" id="tab-projects">Projects</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-fellowships" id="tab-fellowships">Fellowships</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-events" id="tab-events">Events</button>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="tab-panel active" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects">
+        <div class="grant-grid">
+          <div class="grant-card">
+            <div class="grant-top">
+              <p class="grant-name">Project Grant</p>
+              <p class="grant-amount">₹3L&ndash;7L</p>
+            </div>
+            <p class="grant-meta">Per project, per year &middot; Median grant</p>
+            <p class="grant-desc">Enough for a maintainer to treat their project as primary work for a year, not something squeezed in after a day job. Our median award, for projects with a track record and a clear roadmap.</p>
+            <a class="grant-cta" href="https://fossunited.org/grants/apply/new" target="_blank" rel="noopener">Apply for this grant →</a>
+          </div>
+          <div class="grant-card">
+            <div class="grant-top">
+              <p class="grant-name">Founding Project Grant</p>
+              <p class="grant-amount">Up to ₹15L</p>
+            </div>
+            <p class="grant-meta">Per project &middot; Our highest tier</p>
+            <p class="grant-desc">Reserved for a small number of Indian projects with real potential to become critical infrastructure &mdash; the kind of thing other software quietly depends on.</p>
+            <a class="grant-cta" href="https://fossunited.org/grants/apply/new" target="_blank" rel="noopener">Apply for this grant →</a>
+          </div>
+          <div class="grant-card">
+            <div class="grant-top">
+              <p class="grant-name">Infrastructure Grant</p>
+              <p class="grant-amount">₹1L&ndash;3L</p>
+            </div>
+            <p class="grant-meta">Per project</p>
+            <p class="grant-desc">Hosting, mirrors, domains &mdash; the unglamorous costs nobody sponsors, but that decide whether a project stays online or quietly goes dark.</p>
+            <a class="grant-cta" href="https://fossunited.org/grants/apply/new" target="_blank" rel="noopener">Apply for this grant →</a>
+          </div>
+          <div class="grant-card">
+            <div class="grant-top">
+              <p class="grant-name">Audit &amp; Compliance Grant</p>
+              <p class="grant-amount">In-kind</p>
+            </div>
+            <p class="grant-meta">Sponsored, per project</p>
+            <p class="grant-desc">Security, accessibility and compliance audits for projects that are getting real adoption and need to prove they can be trusted at scale.</p>
+            <a class="grant-cta" href="https://fossunited.org/grants/apply/new" target="_blank" rel="noopener">Apply for this grant →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FELLOWSHIPS -->
+      <div class="tab-panel" id="panel-fellowships" role="tabpanel" aria-labelledby="tab-fellowships">
+        <div class="grant-grid">
+          <div class="grant-card">
+            <div class="grant-top">
+              <p class="grant-name">Season of Commits</p>
+              <p class="grant-amount">₹75,000/mo</p>
+            </div>
+            <p class="grant-meta">Per fellow, per month</p>
+            <p class="grant-desc">A full-time stipend so a maintainer can work on their project like a job for a defined stretch &mdash; clearing backlog, shipping a release, or building out something that's been stuck in "someday."</p>
+            <a class="grant-cta" href="https://fossunited.org/grants/apply/new" target="_blank" rel="noopener">Apply for this fellowship →</a>
+          </div>
+          <div class="grant-card">
+            <div class="grant-top">
+              <p class="grant-name">Maintainer Travel Scholarship</p>
+              <p class="grant-amount">₹50,000</p>
+            </div>
+            <p class="grant-meta">Per scholarship</p>
+            <p class="grant-desc">Travel and stay to speak at or attend a conference, including international ones, where a maintainer can find contributors, users, and collaborators.</p>
+            <a class="grant-cta" href="https://fossunited.org/grants/apply/new" target="_blank" rel="noopener">Apply for this scholarship →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENTS -->
+      <div class="tab-panel" id="panel-events" role="tabpanel" aria-labelledby="tab-events">
+        <div class="grant-grid">
+          <div class="grant-card">
+            <div class="grant-top">
+              <p class="grant-name">FOSS Event Grant</p>
+              <p class="grant-amount">₹25,000</p>
+            </div>
+            <p class="grant-meta">Per event, average</p>
+            <p class="grant-desc">Backs a devsprint, hackathon, or conference that produces real FOSS contributions &mdash; not just talks and swag. Organisers anywhere in India can apply.</p>
+            <a class="grant-cta" href="https://fossunited.org/grants/apply/new" target="_blank" rel="noopener">Apply for this grant →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>Not sure which category fits your project?</p>
+        <a class="btn green" href="mailto:maintainers@fossunited.org?subject=Which%20grant%20is%20right%20for%20my%20project%3F">Ask us directly</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <p class="fbrand">FOSS United Foundation</p>
+      <p class="fine">Growing India's FOSS ecosystem, one maintainer at a time.<br>CC&#8209;BY&#8209;SA &middot; CIN &ndash; U74999MH2016NPL288653</p>
+    </div>
+    <div class="flinks">
+      <a href="index.html">Home</a>
+      <a href="https://fossunited.org/grants/thesis" target="_blank" rel="noopener">Grants thesis</a>
+      <a href="events.html">Events</a>
+      <a href="https://forklore.in" target="_blank" rel="noopener">Forklore</a>
+      <a href="mailto:maintainers@fossunited.org">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){ t.setAttribute('aria-selected','false'); });
+        document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+        tab.setAttribute('aria-selected','true');
+        document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maintainer Events — FOSS United Maintainer Programs</title>
+<meta name="description" content="Events built for FOSS maintainers — community calls, the Maintainer Summit, Season of Commits, and FOSS Hack.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --ink:#1A1A1A; --muted:#5D625E; --hairline:#E3E5E5;
+    --green:#387E42; --green-bright:#53B45C; --green-tint:#EAF4EB; --blue:#2456CD; --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',system-ui,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  ::selection{background:var(--green-bright); color:#fff;}
+  .skip{position:absolute; left:-999px; top:0; background:var(--ink); color:#fff; padding:10px 16px; z-index:100;}
+  .skip:focus{left:12px; top:12px;}
+
+  header.site{position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--hairline);}
+  .nav{max-width:var(--max); margin:0 auto; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .brand{font-size:18px; text-decoration:none; white-space:nowrap;}
+  .brand b{font-weight:800;}
+  .brand span{color:var(--muted); font-weight:400;}
+  .navlinks{display:flex; gap:24px; flex-wrap:wrap;}
+  .navlinks a{font-size:14.5px; font-weight:500; text-decoration:none; color:var(--ink); border-bottom:2px solid transparent; padding-bottom:3px; transition:color .15s, border-color .15s;}
+  .navlinks a:hover{color:var(--green); border-color:var(--green);}
+  .navlinks a.util{color:var(--blue);}
+  .navlinks a.current{color:var(--green); border-color:var(--green);}
+
+  section{padding:72px 0;}
+  section + section{border-top:1px solid var(--hairline);}
+  .eyebrow{font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin:0 0 20px;}
+  h1{font-weight:800; font-size:clamp(32px,4.4vw,46px); line-height:1.14; margin:0 0 16px; max-width:16ch;}
+  h1 .accent{color:var(--green);}
+  .lede{color:var(--muted); max-width:64ch; font-size:17px; margin:0 0 8px;}
+
+  .event-list{margin:44px 0 0;}
+  .event{
+    display:grid; grid-template-columns:170px 1fr; gap:32px; padding:32px 0;
+    border-top:1px solid var(--hairline); align-items:start;
+  }
+  .event-list .event:last-child{border-bottom:1px solid var(--hairline);}
+  .event-cadence{font-size:12.5px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.05em; background:var(--green-tint); display:inline-block; padding:5px 10px; border-radius:20px;}
+  .event-title{font-weight:700; font-size:21px; margin:0 0 10px;}
+  .event-desc{color:var(--muted); font-size:15.5px; margin:0 0 14px; max-width:64ch;}
+  .event-link{color:var(--blue); text-decoration:underline; text-underline-offset:3px; font-weight:600; font-size:14.5px;}
+
+  .callout{
+    margin-top:52px; padding:32px; background:var(--green-tint); border-radius:10px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .callout p{margin:0; font-weight:700; font-size:18px; max-width:36ch;}
+  .btn{display:inline-flex; align-items:center; gap:8px; text-decoration:none; padding:13px 24px; font-size:15px; font-weight:700; border-radius:6px; cursor:pointer; border:1.5px solid var(--ink); transition:background .15s, color .15s, border-color .15s;}
+  .btn.green{background:var(--green); border-color:var(--green); color:#fff;}
+  .btn.green:hover{background:transparent; color:var(--green);}
+
+  footer.site{padding:52px 0 68px;}
+  footer.site .wrap{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;}
+  footer.site .fbrand{font-size:16px; font-weight:800; margin:0 0 6px;}
+  footer.site .flinks{display:flex; gap:20px; flex-wrap:wrap; font-size:13.5px; color:var(--muted);}
+  footer.site .flinks a{text-decoration:none;}
+  footer.site .flinks a:hover{color:var(--blue);}
+  footer.site .fine{font-size:13px; color:var(--muted); margin-top:22px; line-height:1.6;}
+
+  @media (max-width:760px){
+    .event{grid-template-columns:1fr; gap:12px;}
+    section{padding:52px 0;}
+    .callout{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="nav">
+    <a class="brand" href="index.html"><b>FOSS United</b> <span>/ Maintainers</span></a>
+    <nav class="navlinks">
+      <a href="index.html#who-support">Who do we support</a>
+      <a href="index.html#why-support">Why do we support</a>
+      <a href="index.html#how-support">How do we support</a>
+      <a class="util" href="grants.html">Grants</a>
+      <a class="util current" href="events.html">Events</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section style="padding-top:60px;">
+    <div class="wrap">
+      <p class="eyebrow">Maintainer events</p>
+      <h1>You don't have to figure this out <span class="accent">alone.</span></h1>
+      <p class="lede">A maintainer's hardest problem usually isn't code. It's not knowing anyone else stuck on the same thing. These are the events built specifically to fix that.</p>
+
+      <div class="event-list">
+        <div class="event">
+          <span class="event-cadence">Annual</span>
+          <div>
+            <p class="event-title">Maintainer Summit</p>
+            <p class="event-desc">A day of maintainers talking to maintainers &mdash; held the day before IndiaFOSS. No pitches, no sponsors on stage, just people comparing notes on governance, burnout, funding and the parts of the job nobody warns you about.</p>
+            <a class="event-link" href="https://fossunited.org" target="_blank" rel="noopener">Details on fossunited.org →</a>
+          </div>
+        </div>
+
+        <div class="event">
+          <span class="event-cadence">Annual</span>
+          <div>
+            <p class="event-title">IndiaFOSS</p>
+            <p class="event-desc">India's largest FOSS conference, and the anchor event for the whole community calendar. Maintainer Programs runs its visibility campaigns, grant announcements and community meetups around it every year.</p>
+            <a class="event-link" href="https://fossunited.org" target="_blank" rel="noopener">Details on fossunited.org →</a>
+          </div>
+        </div>
+
+        <div class="event">
+          <span class="event-cadence">Cohort-based</span>
+          <div>
+            <p class="event-title">Season of Commits</p>
+            <p class="event-desc">A funded, fixed-term stretch where a maintainer works on their own project full-time, with a stipend and check-ins from the foundation &mdash; not a mentorship program in the usual sense, since the maintainer already knows the codebase better than anyone.</p>
+            <a class="event-link" href="grants.html">See fellowship details →</a>
+          </div>
+        </div>
+
+        <div class="event">
+          <span class="event-cadence">Periodic</span>
+          <div>
+            <p class="event-title">FOSS Hack</p>
+            <p class="event-desc">A hackathon built around shipping real contributions to real FOSS projects, including ones in the Maintainer Programs &mdash; a fast way for a project to pick up new contributors who already have skin in the game.</p>
+            <a class="event-link" href="https://fossunited.org" target="_blank" rel="noopener">Details on fossunited.org →</a>
+          </div>
+        </div>
+
+        <div class="event">
+          <span class="event-cadence">Monthly</span>
+          <div>
+            <p class="event-title">Maintainer Community Calls</p>
+            <p class="event-desc">A standing call for anyone in the Community or Support layer of the program &mdash; not a webinar, a working session where maintainers bring what they're stuck on.</p>
+            <a class="event-link" href="https://forum.fossunited.org" target="_blank" rel="noopener">Join the forum for schedules →</a>
+          </div>
+        </div>
+
+        <div class="event">
+          <span class="event-cadence">Ongoing</span>
+          <div>
+            <p class="event-title">Local &amp; Partner Meetups</p>
+            <p class="event-desc">City-level FOSS Club and community meetups across India, many run by past grantees and fellows, eligible for a FOSS Event Grant.</p>
+            <a class="event-link" href="grants.html">See event grant details →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>Running a maintainer-focused event that isn't listed here?</p>
+        <a class="btn green" href="mailto:maintainers@fossunited.org?subject=Listing%20a%20maintainer%20event">Tell us about it</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <p class="fbrand">FOSS United Foundation</p>
+      <p class="fine">Growing India's FOSS ecosystem, one maintainer at a time.<br>CC&#8209;BY&#8209;SA &middot; CIN &ndash; U74999MH2016NPL288653</p>
+    </div>
+    <div class="flinks">
+      <a href="index.html">Home</a>
+      <a href="grants.html">Grants directory</a>
+      <a href="https://fossunited.org/maintainers/thesis" target="_blank" rel="noopener">Maintainer thesis</a>
+      <a href="https://forum.fossunited.org" target="_blank" rel="noopener">Forum</a>
+      <a href="mailto:maintainers@fossunited.org">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
